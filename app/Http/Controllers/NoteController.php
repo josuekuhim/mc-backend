@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notes;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
-class NotesController extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class NotesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Notes $notes)
+    public function show(Note $note)
     {
         //
     }
@@ -42,7 +42,7 @@ class NotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Notes $notes)
+    public function edit(Note $note)
     {
         //
     }
@@ -50,7 +50,7 @@ class NotesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Notes $notes)
+    public function update(Request $request, Note $note)
     {
         //
     }
@@ -58,7 +58,7 @@ class NotesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Notes $notes)
+    public function destroy(Note $note)
     {
         //
     }

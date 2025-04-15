@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Documents;
+use App\Models\Document;
 use Illuminate\Http\Request;
 
-class DocumentsController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class DocumentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Documents $documents)
+    public function show(Document $document)
     {
         //
     }
@@ -42,7 +42,7 @@ class DocumentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Documents $documents)
+    public function edit(Document $document)
     {
         //
     }
@@ -50,7 +50,7 @@ class DocumentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Documents $documents)
+    public function update(Request $request, Document $document)
     {
         //
     }
@@ -58,7 +58,7 @@ class DocumentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Documents $documents)
+    public function destroy(Document $document)
     {
         //
     }
