@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clinician extends Model
@@ -15,6 +14,7 @@ class Clinician extends Model
         'first_name',
         'last_name',
         'email',
+        'password',
         'phone_number',
         'address',
         'city',
@@ -27,41 +27,38 @@ class Clinician extends Model
         'availability_schedule',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
-        'is_active' => 'boolean',
-        'avaliability_schedule' => 'array',
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
-    public function speciality(): BelongsTo
+    protected $casts = [
+        'is_active' => 'boolean',
+        'availability_schedule' => 'array',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Get the speciality that owns the clinician.
+     */
+    public function speciality()
     {
         return $this->belongsTo(Speciality::class);
     }
 
+    /**
+     * Get the patients for the clinician.
+     */
     public function patients()
     {
         return $this->hasMany(Patient::class);
     }
 
-    public function appointments()
-    {
-        return $this->hasMany(Appointment::class);
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    public function scopeBySpeciality($query, $specialityId)
-    {
-        return $query->where('speciality_id', $specialityId);
-    }
-
+    /**
+     * Get the full name attribute.
+     */
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return "{$this->first_name} {$this->last_name}";
     }
 }

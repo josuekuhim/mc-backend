@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->enum('type', ['report', 'evaluation', 'plan', 'referral', 'medical']);
+            $table->string('file_path');
+            $table->integer('file_size');
+            $table->string('file_type');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
