@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->time('time');
-            $table->integer('duration')->default(50); // em minutos
+            $table->integer('duration')->default(50);
             $table->enum('type', ['therapy', 'evaluation', 'followup', 'emergency']);
             $table->text('notes')->nullable();
+            $table->status('boolean')->default(false);
             $table->enum('status', ['scheduled', 'completed', 'cancelled'])->default('scheduled');
             $table->timestamps();
         });

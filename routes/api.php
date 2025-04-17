@@ -49,3 +49,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('appointments/chart', [DashboardController::class, 'appointmentsChart']);
     Route::get('patients/chart', [DashboardController::class, 'patientsChart']);
 });
+
+Route::post('/login', 'Auth\LoginController@apiLogin');
+Route::post('/logout', 'Auth\LoginController@apiLogout')->middleware('auth:sanctum');
+Route::get('/user', 'Auth\UserController@currentUser')->middleware('auth:sanctum');

@@ -40,7 +40,7 @@ class DashboardController extends Controller
         $appointmentsToday = Appointment::whereDate('date', today())->count();
         
         // Calculate hours worked
-        $hoursWorked = Appointment::where('status', 'completed')
+        $hoursWorked = Appointment::where('status', true)
             ->where('date', '>=', $startDate)
             ->sum(DB::raw('duration / 60'));
         
