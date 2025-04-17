@@ -20,37 +20,29 @@ use App\Http\Controllers\Api\DashboardController;
 |
 */
 
-// Rota de teste para verificar se a API está funcionando
 Route::get('/test', function () {
     return response()->json(['message' => 'API funcionando corretamente!']);
 });
 
-// Rotas para Especialidades
 Route::apiResource('specialities', SpecialityController::class);
 
-// Rotas para Profissionais (que também são os usuários do sistema)
 Route::apiResource('clinicians', ClinicianController::class);
 Route::get('clinicians/{clinician}/patients', [ClinicianController::class, 'patients']);
 Route::get('clinicians/{clinician}/appointments', [ClinicianController::class, 'appointments']);
 
-// Rotas para Pacientes
 Route::apiResource('patients', PatientController::class);
 Route::get('patients/{patient}/appointments', [PatientController::class, 'appointments']);
 Route::get('patients/{patient}/documents', [PatientController::class, 'documents']);
 
-// Rotas para Consultas
 Route::apiResource('appointments', AppointmentController::class);
 Route::get('appointments/calendar', [AppointmentController::class, 'calendar']);
 Route::patch('appointments/{appointment}/status', [AppointmentController::class, 'updateStatus']);
 
-// Rotas para Notas de Sessão
 Route::apiResource('appointments.notes', NoteController::class);
 
-// Rotas para Documentos
 Route::apiResource('documents', DocumentController::class);
 Route::get('documents/{document}/download', [DocumentController::class, 'download']);
 
-// Rotas para o Dashboard
 Route::prefix('dashboard')->group(function () {
     Route::get('stats', [DashboardController::class, 'stats']);
     Route::get('appointments/recent', [DashboardController::class, 'recentAppointments']);
