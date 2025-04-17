@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,13 @@ use App\Http\Controllers\Api\DashboardController;
 
 Route::get('/test', function () {
     return response()->json(['message' => 'API funcionando corretamente!']);
+});
+
+// Rotas de autenticação
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
 });
 
 Route::apiResource('specialities', SpecialityController::class);
@@ -49,7 +57,3 @@ Route::prefix('dashboard')->group(function () {
     Route::get('appointments/chart', [DashboardController::class, 'appointmentsChart']);
     Route::get('patients/chart', [DashboardController::class, 'patientsChart']);
 });
-
-Route::post('/login', 'Auth\LoginController@apiLogin');
-Route::post('/logout', 'Auth\LoginController@apiLogout')->middleware('auth:sanctum');
-Route::get('/user', 'Auth\UserController@currentUser')->middleware('auth:sanctum');
